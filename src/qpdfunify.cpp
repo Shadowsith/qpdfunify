@@ -127,7 +127,7 @@ void QPdfUnify::resizeEvent(QResizeEvent* event) {
     QMainWindow::resizeEvent(event);
     if(this->width() >= 360) {
         int resizeX = 20;
-        int resizeY = 30;
+        int resizeY = 40;
         ui->btnFile1->move(this->width()-resizeX-ui->btnFile1->width(),ui->btnFile1->y());
         ui->btnFile2->move(this->width()-resizeX-ui->btnFile2->width(),ui->btnFile2->y());
         ui->btnOutput->move(this->width()-resizeX-ui->btnOutput->width(),ui->btnOutput->y());
@@ -145,7 +145,7 @@ void QPdfUnify::resizeEvent(QResizeEvent* event) {
         {
             ui->btnAdd->move(ui->btnAdd->x(),this->height()-ui->btnAdd->height()-resizeY);
             ui->btnUnify->move(ui->btnUnify->x(),this->height()-ui->btnAdd->height()-resizeY);
-            ui->btnClose->move(this->width()-resizeY-ui->btnClose->width(),this->height()-ui->btnAdd->height()-resizeY);
+            ui->btnClose->move(this->width()-resizeX-ui->btnClose->width(),this->height()-ui->btnAdd->height()-resizeY);
         }
     }
 }
