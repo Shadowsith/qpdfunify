@@ -26,15 +26,20 @@ SOURCES += \
     src/main.cpp \
     src/qpdfunify.cpp \
     src/pdfunite.cpp \
-    src/lib/qdocker/qdocker.cpp
+    src/lib/qdocker/qdocker.cpp \
+    src/about.cpp
 
 HEADERS += \
     src/qpdfunify.h \
     src/pdfunite.h \
-    src/lib/qdocker/qdocker.h
+    src/lib/qdocker/qdocker.h \
+    src/lib/qdocker/qdocker.h \
+    src/lib/qdocker/qdocker.h \
+    src/about.h
 
 FORMS += \
-    src/qpdfunify.ui
+    src/qpdfunify.ui \
+    src/about.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

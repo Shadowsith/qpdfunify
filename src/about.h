@@ -19,27 +19,28 @@ You should have received a copy of the GNU General Public License
 along with QPdfUnify.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PDFUNITE_H
-#define PDFUNITE_H
+#ifndef ABOUT_H
+#define ABOUT_H
 
-#include <QList>
+#include <QWidget>
 
-enum UnifyState {
-    SUCCESS = 0,
-    FNF,
-    ERROR,
-};
+namespace Ui {
+class About;
+}
 
-class PdfUnite {
-
-private:
-    const std::string pdf_unite = "pdfunite ";
+class About : public QWidget
+{
+    Q_OBJECT
 
 public:
-    PdfUnite();
-    ~PdfUnite();
+    static About* open();
+    static bool isAlloc();
+    Ui::About *ui;
 
-    UnifyState unifyPdf(QList<QString>& pdfFiles, QString output);
+private:
+    explicit About(QWidget *parent = nullptr);
+    ~About();
+    static About* instance;
 };
 
-#endif // PDFUNITE_H
+#endif // ABOUT_H

@@ -1,3 +1,24 @@
+/*
+Project:     QPdfUnify
+Description: A Qt frontend for merge and split pdf files
+Author:      Philip Mayer (Shadowsith) <philip.mayer@shadowsith.de>
+Copyright:   2018 Philip Mayer
+License:     GPLv3+
+
+QPdfUnify is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+QPdfUnify is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with QPdfUnify.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "qpdfunify.h"
 #include "ui_qpdfunify.h"
 #include "pdfunite.h"
@@ -13,6 +34,8 @@
 #include <QDesktopWidget>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QAction>
+#include <QDesktopServices>
 #include "lib/qdocker/qdocker.h"
 
 QPdfUnify::QPdfUnify(QWidget *parent) :
@@ -21,6 +44,19 @@ QPdfUnify::QPdfUnify(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    connectButtons();
+    connectMenu();
+
+    this->resize(600, 300);
+}
+
+QPdfUnify::~QPdfUnify()
+{
+    delete ui;
+}
+
+
+void QPdfUnify::connectButtons() {
     connect(ui->btnAdd, &QPushButton::clicked, [=] {
         addNewFileEntry();
     });
@@ -40,13 +76,16 @@ QPdfUnify::QPdfUnify(QWidget *parent) :
     connect(ui->btnOutput, &QPushButton::clicked, [=] {
         this->saveOutput();
     });
-
-    this->resize(600, 300);
 }
 
-QPdfUnify::~QPdfUnify()
-{
-    delete ui;
+void QPdfUnify::connectMenu() {
+    connect(ui->actionOpen, &QAction::triggered, [=] {
+        this->openWithDefaultApp();
+    });
+
+    connect(ui->actionAbout, &QAction::triggered, [=] {
+        this->openAbout();
+    });
 }
 
 void QPdfUnify::addInputLines(QLabel* lbl, QLineEdit* le, QPushButton* btn) {
@@ -123,6 +162,25 @@ void QPdfUnify::createUnifiedPdf() {
     }
 }
 
+void QPdfUnify::openAbout() {
+    info = About::open();
+    if(info != nullptr) {
+        const int fHeight = info->height();
+        const int fWidth = info->width();
+        info->setFixedSize(fWidth, fHeight);
+        info->show();
+    }
+}
+
+void QPdfUnify::openWithDefaultApp() {
+   QString filePath = QFileDialog::getOpenFileName(this, tr("Open PDF"), QDir::homePath(),
+                                                   tr("Pdf files") + "( *.pdf)");
+   QFileInfo finfo(filePath);
+   if(finfo.exists() && finfo.isFile()) {
+      QDesktopServices::openUrl(filePath);
+   }
+}
+
 void QPdfUnify::resizeEvent(QResizeEvent* event) {
     QMainWindow::resizeEvent(event);
     if(this->width() >= 360) {
@@ -145,7 +203,8 @@ void QPdfUnify::resizeEvent(QResizeEvent* event) {
         {
             ui->btnAdd->move(ui->btnAdd->x(),this->height()-ui->btnAdd->height()-resizeY);
             ui->btnUnify->move(ui->btnUnify->x(),this->height()-ui->btnAdd->height()-resizeY);
-            ui->btnClose->move(this->width()-resizeX-ui->btnClose->width(),this->height()-ui->btnAdd->height()-resizeY);
+            ui->btnClose->move(this->width()-resizeX-ui->btnClose->width(),
+                               this->height()-ui->btnAdd->height()-resizeY);
         }
     }
 }
