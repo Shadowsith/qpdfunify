@@ -98,9 +98,9 @@ void QPdfUnify::addInputLines(QLabel* lbl, QLineEdit* le, QPushButton* btn) {
 }
 
 void QPdfUnify::addNewFileEntry() {
-    QLabel* fileLabel = new QLabel(ui->centralWidget);
-    QLineEdit* filePath = new QLineEdit(ui->centralWidget);
-    QPushButton* fileBtn = new QPushButton(ui->centralWidget);
+    QLabel* fileLabel = new QLabel(ui->tabWidget);
+    QLineEdit* filePath = new QLineEdit(ui->tabWidget);
+    QPushButton* fileBtn = new QPushButton(ui->tabWidget);
     QDocker qd(14);
 
     fileLabel->resize(ui->lblFile2->size());
@@ -184,6 +184,8 @@ void QPdfUnify::openWithDefaultApp() {
 void QPdfUnify::resizeEvent(QResizeEvent* event) {
     QMainWindow::resizeEvent(event);
     if(this->width() >= 360) {
+        ui->tabWidget->resize(this->width()-ui->tabWidget->x(),
+                              this->height()-ui->tabWidget->y()-100);
         int resizeX = 20;
         int resizeY = 40;
         ui->btnFile1->move(this->width()-resizeX-ui->btnFile1->width(),ui->btnFile1->y());
