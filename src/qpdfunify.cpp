@@ -188,16 +188,16 @@ void QPdfUnify::resizeEvent(QResizeEvent* event) {
                               this->height()-ui->tabWidget->y()-100);
         int resizeX = 20;
         int resizeY = 40;
-        ui->btnFile1->move(this->width()-resizeX-ui->btnFile1->width(),ui->btnFile1->y());
-        ui->btnFile2->move(this->width()-resizeX-ui->btnFile2->width(),ui->btnFile2->y());
-        ui->btnOutput->move(this->width()-resizeX-ui->btnOutput->width(),ui->btnOutput->y());
+        ui->btnFile1->move(ui->tabMerge->width()-resizeX-ui->btnFile1->width(),ui->btnFile1->y());
+        ui->btnFile2->move(ui->tabMerge->width()-resizeX-ui->btnFile2->width(),ui->btnFile2->y());
+        ui->btnOutput->move(ui->tabMerge->width()-resizeX-ui->btnOutput->width(),ui->btnOutput->y());
 
         ui->leFile1->resize(ui->btnFile1->x()-ui->leFile1->x()-resizeX, ui->leFile1->height());
         ui->leFile2->resize(ui->btnFile2->x()-ui->leFile2->x()-resizeX, ui->leFile2->height());
         ui->leOutput->resize(ui->btnFile2->x()-ui->leOutput->x()-resizeX, ui->leOutput->height());
 
         for(PdfInput in : m_entryList) {
-            in.btn->move(this->width()-resizeX-in.btn->width(), in.btn->y());
+            in.btn->move(ui->tabMerge->width()-resizeX-in.btn->width(), in.btn->y());
             in.le->resize(in.btn->x()-in.le->x()-resizeX, in.le->height());
         }
 
