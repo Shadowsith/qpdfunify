@@ -29,7 +29,10 @@
       <height>271</height>
      </rect>
     </property>
-    <widget class="QWidget" name="tab">
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <widget class="QWidget" name="tabMerge">
      <attribute name="title">
       <string>Tab 1</string>
      </attribute>
@@ -142,7 +145,7 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_2">
+    <widget class="QWidget" name="tabSplit">
      <attribute name="title">
       <string>Tab 2</string>
      </attribute>

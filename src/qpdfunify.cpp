@@ -98,9 +98,9 @@ void QPdfUnify::addInputLines(QLabel* lbl, QLineEdit* le, QPushButton* btn) {
 }
 
 void QPdfUnify::addNewFileEntry() {
-    QLabel* fileLabel = new QLabel(ui->tabWidget);
-    QLineEdit* filePath = new QLineEdit(ui->tabWidget);
-    QPushButton* fileBtn = new QPushButton(ui->tabWidget);
+    QLabel* fileLabel = new QLabel(ui->tabMerge);
+    QLineEdit* filePath = new QLineEdit(ui->tabMerge);
+    QPushButton* fileBtn = new QPushButton(ui->tabMerge);
     QDocker qd(14);
 
     fileLabel->resize(ui->lblFile2->size());
